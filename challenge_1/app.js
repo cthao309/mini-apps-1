@@ -2,7 +2,7 @@
 let ticTacToeLogic = {
   // initialize the game
   initialize: function() {
-    this.renderTable();
+    ticTacToeLogic.renderTable();
   },
 
   // table setting
@@ -11,6 +11,18 @@ let ticTacToeLogic = {
     "", "", "",
     "", "", "",
     "", "", "",
+  ],
+
+  // winning combination
+  winComb: [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
   ],
 
   // keep track of turn -- default (turn = false, first player turn 'X')
@@ -64,10 +76,10 @@ let ticTacToeLogic = {
       // add a class to the node
       squareContainer.setAttribute('id', i);
 
+      squareContainer.addEventListener('click', ticTacToeLogic.playerMove);
+          // cb()
       // append the squares onto the dom
       tableId.append(squareContainer);
-
-      tableId.addEventListener('click', this.playerMove);
     }
 
   },
@@ -75,7 +87,11 @@ let ticTacToeLogic = {
   // computer turn - logic
   playerMove: function(e) {
 
+    console.log('this (playerMove) => ', this, this)
+    console.log('this (this.playerMove) => ', this.playerMove)
+
     console.log('move => ', e.target, e.target.id);
+
     let square = e.target;
     let clickedSquareIndex = Number(e.target.id);
 
@@ -83,7 +99,8 @@ let ticTacToeLogic = {
 
     console.log('turn => ', currentPlayer)
 
-    square.removeEventListener('click', this.playerMove);
+    square.removeEventListener('click', ticTacToeLogic.playerMove);
+
 
     square.innerText = currentPlayer;
 
@@ -93,17 +110,9 @@ let ticTacToeLogic = {
       ticTacToeLogic.table[clickedSquareIndex] = currentPlayer;
     }
 
-    console.log('table => ', this.table)
+    console.log('table => ', ticTacToeLogic.table)
 
-  },
-
-  // logic to append move to the dom
-  appendToDom: function(index, turn) {
-    this.table[index] = turn;
-
-    console.log('table => ', this.table)
-    this.renderTable();
-  },
+  }
 }
 
 // initialize the tic-tac-toe game
@@ -116,13 +125,8 @@ let startBtn = document.getElementById('start');
 startBtn.addEventListener('click', function(e) {
   console.log('hello tic tac toe. Game is staring...');
 
-
-
-  // invoke aiMove
 });
 
-
-// ticTacToeLogic.playerMove();
 
 // reset the game
 let resetBtn = document.getElementById('reset');
