@@ -13,18 +13,6 @@ let ticTacToeLogic = {
     "", "", "",
   ],
 
-  // winning combination
-  winComb: [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
-  ],
-
   // keep track of turn -- default (turn = false, first player turn 'X')
   turn: false,
 
@@ -51,9 +39,6 @@ let ticTacToeLogic = {
 
     // clear the game table
     let squares = document.getElementsByClassName('square');
-
-    console.log('child => ', squares)
-    // tableId.removeChild();
 
     let table = this.table;
 
@@ -92,31 +77,71 @@ let ticTacToeLogic = {
 
     console.log('move => ', e.target, e.target.id);
 
+    // grab the element being clicked
     let square = e.target;
+
+    // grab it id
     let clickedSquareIndex = Number(e.target.id);
 
+    // toggle between player
     let currentPlayer = ticTacToeLogic.toggleTurn();
 
     console.log('turn => ', currentPlayer)
 
+    // remove the click event listener on the square once it has been clicked
     square.removeEventListener('click', ticTacToeLogic.playerMove);
 
-
+    // append player move on the dom
     square.innerText = currentPlayer;
 
     if(currentPlayer === 'X') {
+      // update the table for "X" player
       ticTacToeLogic.table[clickedSquareIndex] = currentPlayer;
     } else {
+      // update the table for "O" player
       ticTacToeLogic.table[clickedSquareIndex] = currentPlayer;
     }
 
     console.log('table => ', ticTacToeLogic.table)
 
+    // check for winning combination
+    ticTacToeLogic.checkWinning(currentPlayer);
+  },
+
+  // method for checking winning combination
+  checkWinning: function(player) {
+    console.log('checkWinning => ', player)
+
+    // winning combination
+    // [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ]
+
+    let table = ticTacToeLogic.table;
+
+    console.log(player === 'X')
+
+    let case1 = (player === table[0] && player === table[1] && player === table[2]);
+    let case2 = (player === table[2] && player === table[3] && player === table[4]);
+    let case3 = (player === table[6] && player === table[7] && player === table[8]);
+    let case4 = (player === table[0] && player === table[3] && player === table[6]);
+    let case5 = (player === table[1] && player === table[4] && player === table[7]);
+    let case6 = (player === table[2] && player === table[5] && player === table[8]);
+    let case7 = (player === table[0] && player === table[4] && player === table[8]);
+    let case8 = (player === table[2] && player === table[4] && player === table[6]);
+
+    if(case1 || case2 || case3 || case4 || case5 || case6 || case7 || case8) {
+      // alert(`We have a winner: ${player} wins`)
+      let message = document.getElementById('message');
+
+      message.innerText = `We have a winner. ${player} wins.`;
+      let square = document.getElementsByClassName('square');
+
+      for(let i = 0; i < square.length; i++) {
+        square[i].removeEventListener('click', ticTacToeLogic.playerMove);
+      }
+    }
   }
 }
 
-// initialize the tic-tac-toe game
-ticTacToeLogic.initialize();
 
 // grab the start btn
 let startBtn = document.getElementById('start');
@@ -125,6 +150,8 @@ let startBtn = document.getElementById('start');
 startBtn.addEventListener('click', function(e) {
   console.log('hello tic tac toe. Game is staring...');
 
+  // initialize the tic-tac-toe game
+  ticTacToeLogic.initialize();
 });
 
 

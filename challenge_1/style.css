@@ -18,3 +18,12 @@ body {
   font-size: 85px;
   text-align: center;
 }
+
+#message {
+  margin-top: 1rem;
+  color: red;
+}
+
+marquee {
+  color: blue;
+}
