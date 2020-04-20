@@ -4,6 +4,10 @@
 let ticTacToeLogic = {
   // initialize the game
   initialize: function() {
+
+    // invoke the for user prompt
+    ticTacToeLogic.checkPlayerToGoFirst();
+
     document.getElementById('start').removeEventListener('click', ticTacToeLogic.initialize);
 
     // render the table
@@ -11,6 +15,23 @@ let ticTacToeLogic = {
 
     // render the score
     ticTacToeLogic.renderScore();
+  },
+
+  // check for invalid input to start the game
+  checkPlayerToGoFirst: function() {
+    let playerToGoFirst;
+    playerToGoFirst = prompt('Which would go first, X or O?');
+
+    console.log('selected => ', playerToGoFirst.toUpperCase() === 'X')
+
+    if(playerToGoFirst.toUpperCase() !== 'X' && playerToGoFirst.toUpperCase() !== 'O') {
+      ticTacToeLogic.checkPlayerToGoFirst();
+    } else {
+      ticTacToeLogic.turn = !ticTacToeLogic.turn;
+      return;
+    }
+
+    console.log('selected player => ', playerToGoFirst)
   },
 
   // table setting
@@ -103,10 +124,10 @@ let ticTacToeLogic = {
     square.innerText = currentPlayer;
 
     if(currentPlayer === 'X') {
-      // update the table for "X" player
+      // update the table for 'X' player
       ticTacToeLogic.table[clickedSquareIndex] = currentPlayer;
     } else {
-      // update the table for "O" player
+      // update the table for 'O' player
       ticTacToeLogic.table[clickedSquareIndex] = currentPlayer;
     }
 
@@ -168,11 +189,13 @@ let ticTacToeLogic = {
     let board = document.getElementById('board');
     board.remove();
 
+    // create a new board
     let newBoard = document.createElement('div');
     newBoard.setAttribute('id', 'board');
 
     document.body.append(newBoard)
 
+    // re-render the board
     ticTacToeLogic.renderTable();
   }
 }
