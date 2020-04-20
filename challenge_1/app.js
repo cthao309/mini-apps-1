@@ -18,12 +18,10 @@ let ticTacToeLogic = {
 
   // toggle turn
   toggleTurn: function() {
-    // ticTacToe.turn = !ticTacToeLogic.turn;
 
     let turn = !ticTacToeLogic.turn;
 
     ticTacToeLogic.turn = turn;
-
 
     console.log('from toggleTurn ', turn)
 
@@ -79,14 +77,23 @@ let ticTacToeLogic = {
 
     console.log('move => ', e.target, e.target.id);
     let square = e.target;
+    let clickedSquareIndex = Number(e.target.id);
 
     let currentPlayer = ticTacToeLogic.toggleTurn();
 
     console.log('turn => ', currentPlayer)
 
-    // if(currentPlayer === 'X') {
+    square.removeEventListener('click', this.playerMove);
 
-    // }
+    square.innerText = currentPlayer;
+
+    if(currentPlayer === 'X') {
+      ticTacToeLogic.table[clickedSquareIndex] = currentPlayer;
+    } else {
+      ticTacToeLogic.table[clickedSquareIndex] = currentPlayer;
+    }
+
+    console.log('table => ', this.table)
 
   },
 
@@ -114,4 +121,11 @@ startBtn.addEventListener('click', function(e) {
   // invoke aiMove
 });
 
-ticTacToeLogic.playerMove();
+
+// ticTacToeLogic.playerMove();
+
+// reset the game
+let resetBtn = document.getElementById('reset');
+resetBtn.addEventListener('click', function() {
+  window.location.reload();
+})
