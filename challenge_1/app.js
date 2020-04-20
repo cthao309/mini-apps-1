@@ -13,50 +13,81 @@ let ticTacToeLogic = {
     "", "", "",
   ],
 
-  // object to keep track of which square has been used
-  trackMove: {},
+  // keep track of turn -- default (turn = false, first player turn 'X')
+  turn: false,
+
+  // toggle turn
+  toggleTurn: function() {
+    // ticTacToe.turn = !ticTacToeLogic.turn;
+
+    let turn = !ticTacToeLogic.turn;
+
+    ticTacToeLogic.turn = turn;
+
+
+    console.log('from toggleTurn ', turn)
+
+    if(turn) {
+      return 'X';
+    } else {
+      return 'O'
+    }
+  },
 
   // render table
   renderTable: function() {
     // grab the table id from the dom
     let tableId = document.getElementById('game_table');
 
+    // clear the game table
+    let squares = document.getElementsByClassName('square');
+
+    console.log('child => ', squares)
+    // tableId.removeChild();
+
     let table = this.table;
+
     console.log('table => ', table)
 
     // loop through the table array to generate the table
     for(let i = 0; i < table.length; i++) {
       // create the element node
-      let node = document.createElement('div');
+      let squareContainer = document.createElement('button');
 
       // create the text node
       let textNode = document.createTextNode(table[i]);
 
+      // add a class "square"
+      squareContainer.classList.add('square');
+
       // append the text node to the element node
-      node.append(textNode);
+      squareContainer.append(textNode);
 
       // add a class to the node
-      node.classList.add('square');
+      squareContainer.setAttribute('id', i);
 
       // append the squares onto the dom
-      tableId.append(node);
+      tableId.append(squareContainer);
+
+      tableId.addEventListener('click', this.playerMove);
     }
 
   },
 
   // computer turn - logic
-  aiMove: function() {
-    let randomMove = Math.floor(Math.random() * this.table.length);
-    console.log('computer turn => ', randomMove)
+  playerMove: function(e) {
 
-    if(!this.trackMove[randomMove] && Object.keys(this.trackMove).length <= this.table.length) {
-      this.trackMove[randomMove] = true
-    } else {
-      this.aiMove();
-    }
+    console.log('move => ', e.target, e.target.id);
+    let square = e.target;
 
-    console.log('tracker => ', this.trackMove)
-    this.appendToDom(randomMove, 'X');
+    let currentPlayer = ticTacToeLogic.toggleTurn();
+
+    console.log('turn => ', currentPlayer)
+
+    // if(currentPlayer === 'X') {
+
+    // }
+
   },
 
   // logic to append move to the dom
@@ -81,6 +112,6 @@ startBtn.addEventListener('click', function(e) {
 
 
   // invoke aiMove
-  ticTacToeLogic.aiMove();
 });
 
+ticTacToeLogic.playerMove();
