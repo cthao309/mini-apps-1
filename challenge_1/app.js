@@ -157,14 +157,18 @@ let ticTacToeLogic = {
       ticTacToeLogic.score[player]++;
 
       // grab the message element to display winning
-      let message = document.getElementById('message');
-
       // add text of winning
+      let message = document.getElementById('message');
       message.innerText = `We have a winner. ${player} wins.`;
 
-      let square = document.getElementsByClassName('square');
+      // grab the message from marquee
+      // add text to direct the user on how to play the game
+      let marquee = document.getElementsByTagName('marquee')[0];
+      marquee.innerText = `To continue playing press on the reset button`;
+
 
       // loop to remove all the click event listener on the square once a winner is known
+      let square = document.getElementsByClassName('square');
       for(let i = 0; i < square.length; i++) {
         square[i].removeEventListener('click', ticTacToeLogic.playerMove);
       }
@@ -182,16 +186,14 @@ let ticTacToeLogic = {
     }
 
     // toggle between player
-    let player = ticTacToeLogic.turn ? 'X' : 'O';
-
     // display message whose turn to go first
+    let player = ticTacToeLogic.turn ? 'X' : 'O';
     let playerToStartFirst = document.getElementById('playerStartingFirst');
     playerStartingFirst.innerText = `Player "${player}" is starting first`
 
     // grab the message element to display winning
-    let message = document.getElementById('message');
-
     // add text of winning
+    let message = document.getElementById('message');
     message.innerText = ``;
 
     // remove the old board
