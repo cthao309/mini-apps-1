@@ -38,6 +38,14 @@ h5 {
   text-align: center;
 }
 
+.square.O{
+  text-shadow: 1px 1px 2px #3e2e2e, 0 0 1em blue, 0 0 0.2em blue;
+}
+
+.square.X{
+  text-shadow: 1px 1px 2px #3e2e2e, 0 0 1em #f80505, 0 0 0.2em #fa1804;;
+}
+
 #message {
   margin-top: 1rem;
   color: red;

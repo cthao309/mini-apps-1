@@ -113,11 +113,13 @@ let ticTacToeLogic = {
     // grab the element being clicked
     let square = e.target;
 
+
     // grab it id
     let clickedSquareIndex = Number(e.target.id);
 
     // toggle between player
     let currentPlayer = ticTacToeLogic.toggleTurn();
+    square.classList.add(currentPlayer)
 
     // remove the click event listener on the square once it has been clicked
     square.removeEventListener('click', ticTacToeLogic.playerMove);
@@ -152,6 +154,7 @@ let ticTacToeLogic = {
     let case6 = (player === table[2] && player === table[5] && player === table[8]);
     let case7 = (player === table[0] && player === table[4] && player === table[8]);
     let case8 = (player === table[2] && player === table[4] && player === table[6]);
+    let case9 = table[0] !== "" && table[1] !== "" && table[2] !== "" && table[3] !== "" && table[4] !== "" && table[5] !== "" && table[6] !== "" && table[7] !== "" && table[8] !== "";
 
     if(case1 || case2 || case3 || case4 || case5 || case6 || case7 || case8) {
       ticTacToeLogic.score[player]++;
@@ -175,6 +178,13 @@ let ticTacToeLogic = {
 
       // render new score sheet
       ticTacToeLogic.renderScore();
+    }
+
+    if(case9) {
+      // grab the message element to display winning
+      // add text of winning
+      let message = document.getElementById('message');
+      message.innerText = `We have a tie.`;
     }
   },
 
