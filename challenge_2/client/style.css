@@ -7,3 +7,15 @@ body {
 section.content_container {
   text-align: center;
 }
+
+form.form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 auto;
+}
+
+input[type="submit"] {
+  width: 10%;
+  margin-top: 1rem;
+}
