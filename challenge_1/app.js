@@ -167,7 +167,7 @@ let ticTacToeLogic = {
       // grab the message from marquee
       // add text to direct the user on how to play the game
       let marquee = document.getElementsByTagName('marquee')[0];
-      marquee.innerText = `To continue playing press on the reset button`;
+      marquee.innerText = `To continue competing press on the reset button, or press clear score to start new game`;
 
 
       // loop to remove all the click event listener on the square once a winner is known
