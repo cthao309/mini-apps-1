@@ -22,16 +22,18 @@ let ticTacToeLogic = {
     let playerToGoFirst;
     playerToGoFirst = prompt('Which would go first, X or O?');
 
-    console.log('selected => ', playerToGoFirst.toUpperCase() === 'X')
+    let player = playerToGoFirst.toUpperCase();
 
-    if(playerToGoFirst.toUpperCase() !== 'X' && playerToGoFirst.toUpperCase() !== 'O') {
+    if(player !== 'X' && player !== 'O') {
       ticTacToeLogic.checkPlayerToGoFirst();
     } else {
-      ticTacToeLogic.turn = !ticTacToeLogic.turn;
+      ticTacToeLogic.turn = player === 'X' ? ticTacToeLogic.turn : !ticTacToeLogic.turn;
+
+      let playerToStartFirst = document.getElementById('playerStartingFirst');
+      playerStartingFirst.innerText = `Player "${player}" is starting first`
       return;
     }
 
-    console.log('selected player => ', playerToGoFirst)
   },
 
   // table setting
@@ -58,7 +60,7 @@ let ticTacToeLogic = {
   },
 
   // keep track of turn -- default (turn = false, first player turn 'X')
-  turn: false,
+  turn: true,
 
   // toggle turn
   toggleTurn: function() {
@@ -68,9 +70,9 @@ let ticTacToeLogic = {
     ticTacToeLogic.turn = turn;
 
     if(turn) {
-      return 'X';
+      return 'O';
     } else {
-      return 'O'
+      return 'X'
     }
   },
 
@@ -178,6 +180,13 @@ let ticTacToeLogic = {
     for(let i = 0; i < ticTacToeLogic.table.length; i++) {
       ticTacToeLogic.table[i] = '';
     }
+
+    // toggle between player
+    let player = ticTacToeLogic.turn ? 'X' : 'O';
+
+    // display message whose turn to go first
+    let playerToStartFirst = document.getElementById('playerStartingFirst');
+    playerStartingFirst.innerText = `Player "${player}" is starting first`
 
     // grab the message element to display winning
     let message = document.getElementById('message');
