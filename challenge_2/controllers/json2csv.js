@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+
+
 const convertJson2csv = function(req, res) {
   console.log('console log from the json2csv file...', req.body);
   console.log('dirname => ', __dirname)
@@ -47,7 +49,37 @@ const convertJson2csv = function(req, res) {
 
       let csvResult = `<p>${csvCol}</p>${csvRow}`;
 
-      res.status(201).send(`<div class="data"> ${csvResult} </div>`);
+      let html = `
+        <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>csv generator</title>
+            <link rel="stylesheet" href="style.css" />
+          </head>
+          <body>
+            <section class="content_container">
+              <div class="heading">
+                  <h2>CSV GENERATOR</h2>
+                  <h4>By Charlie Thao</h4>
+              </div>
+
+              <!-- form tag for user input of json text -->
+              <form class="form" method="POST" action="/json2csv">
+                <label for="json">Select a json file to upload:</label>
+                <input type="file" id="jsonfile" name="jsonFile" />
+                <input type="submit" value="Submit" />
+              </form>
+            </section>
+            <div class="data"> ${csvResult} </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="app.js"></script>
+          </body>
+        </html>`
+
+      res.status(201).send(html);
     }
   })
 
