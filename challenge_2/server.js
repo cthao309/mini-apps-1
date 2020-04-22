@@ -21,6 +21,11 @@ app.use(express.static(path.join(__dirname, '/client')));
 // end point for post request
 app.post('/json2csv', json2csv)
 
+// end point for download request
+app.get('/download/:fileName', (req, res) => {
+  res.download(__dirname + `/samples/${req.params.fileName}.csv`);
+});
+
 // event listener on the application at 3000
 app.listen(PORT, () => {
   console.log(`Server is listening on http://localhost:${PORT}`)

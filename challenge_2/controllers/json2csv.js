@@ -39,8 +39,31 @@ const convertJson2csv = function(req, res) {
 
       getJSONpropertieAndValue(jsonData);
 
+      //#############################################################
+      // reformat the converted csv file to be save for download
+      //#############################################################
       let csvCol = Object.keys(csvFields).join(',');
+      let saveCSVRow = '';
 
+      csvValues.forEach(el => {
+        saveCSVRow += `${el.join(',')}\n`;
+      });
+
+      let saveCSVFile = `${csvCol}\n${saveCSVRow}`;
+
+      let fileName = req.body.jsonFile.split('.')[0];
+
+      console.log('file Name: ', fileName)
+      console.log(saveCSVFile)
+
+      fs.writeFile(__dirname + `/../samples/${fileName}.csv`, saveCSVFile, (err) => {
+        if(err) throw err;
+        console.log('\n$$$$$$ The file has been saved! $$$$$\n')
+      })
+
+      //#############################################################
+      // reformat to be display csv file to the browser
+      //#############################################################
       let csvRow = '';
 
       csvValues.forEach(el => {
@@ -72,7 +95,12 @@ const convertJson2csv = function(req, res) {
                 <input type="submit" value="Submit" />
               </form>
             </section>
-            <div class="data"> ${csvResult} </div>
+
+            <div class="data">
+              ${csvResult}
+              <a href="/download/${fileName}">Download CSV File</a>
+            </div>
+
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="app.js"></script>
