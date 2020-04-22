@@ -28,19 +28,17 @@ const convertJson2csv = function(req, res) {
 
   getJSONpropertieAndValue(jsonData);
 
-  console.log(Object.keys(csvFields))
-  console.log(csvValues)
-
   let csvCol = Object.keys(csvFields).join(',');
+
   let csvRow = '';
+
   csvValues.forEach(el => {
-    csvRow += el.join(',') + '\n';
+    csvRow += `<p> ${el.join(',')} </p>`;
   });
 
-  let csvResult = csvCol + '\n' + csvRow;
+  let csvResult = `<p>${csvCol}</p>${csvRow}`;
 
-  console.log(csvResult)
-  res.status(201).send(csvResult);
+  res.status(201).send(`<div class="data"> ${csvResult} </div>`);
 }
 
 module.exports = convertJson2csv;
