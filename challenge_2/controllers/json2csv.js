@@ -1,10 +1,7 @@
 const fs = require('fs');
 
-
-
 const convertJson2csv = function(req, res) {
   console.log('console log from the json2csv file...', req.body);
-  console.log('dirname => ', __dirname)
 
   let jsonData = {};
   let csvValues = [];
@@ -100,7 +97,6 @@ const convertJson2csv = function(req, res) {
               ${csvResult}
               <a href="/download/${fileName}">Download CSV File</a>
             </div>
-
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="app.js"></script>
