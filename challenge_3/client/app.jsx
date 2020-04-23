@@ -320,7 +320,27 @@ class App extends React.Component {
   }
 
   saveUserInfoToDatabase() {
+    console.log('saving data to database...');
 
+    let newData = {...this.state};
+
+    // confirmPassword, require, form, isValidPassword
+    delete newData[confirmPassword];
+    delete newData[require];
+    delete newData[form];
+    delete newData[isValidPassword];
+
+    $.ajax({
+      type: "POST",
+      url: 'http://localhost:3000',
+      data: newData,
+      success: () => {
+        console.log('Successful saving the data')
+      },
+      error: (err) => {
+        console.log('Error in saving the data => ', err)
+      }
+    })
   }
 
   handleFormSubmit(userData) {
