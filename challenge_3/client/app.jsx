@@ -59,7 +59,7 @@ class UserForm extends React.Component {
           <label>Name</label>
           <input onChange={this.handleOnChange} type="text" value={this.state.name} name="name" placeholder="name"></input>
           <label>Email</label>
-          <input onChange={this.handleOnChange} type="text" value={this.state.email} name="email" placeholder="email"></input>
+          <input onChange={this.handleOnChange} type="email" value={this.state.email} name="email" placeholder="email"></input>
           <label>Password</label>
           <input onChange={this.handleOnChange} type="password" value={this.state.password} name="password" placeholder="password"></input>
           <label>Confirm Password</label>
@@ -254,8 +254,10 @@ class ConfirmationForm extends React.Component {
 
 const AlertMessage = () => {
   return (
-    <h1> Your information is saved into the database </h1>
-    <a href="/">Go to home page</a>
+    <div>
+      <h1> Your information is saved into the database </h1>
+      <a href="/">Go to home page</a>
+    </div>
   )
 }
 
