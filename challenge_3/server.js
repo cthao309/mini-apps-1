@@ -14,6 +14,11 @@ app.get('/', (req, res) => {
   res.send(path.join(__dirname, '/../public/index.html'));
 });
 
+// post request
+app.post('/', (req, res) => {
+  console.log('POSTING (data) => ', req.body)
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server is starting at http://localhost:${PORT}`);

@@ -245,7 +245,7 @@ class ConfirmationForm extends React.Component {
         </div>
         <div>
           <button onClick={() => this.props.handleNextBtn()}> Purchase </button>
-          <a href="/"> Edit </a>
+          <a href="http://localhost:3000"> Edit </a>
         </div>
       </div>
     )
@@ -256,7 +256,7 @@ const AlertMessage = () => {
   return (
     <div>
       <h1> Your information is saved into the database </h1>
-      <a href="/">Go to home page</a>
+      <a href="http:localhost:3000">Go to home page</a>
     </div>
   )
 }
@@ -322,7 +322,7 @@ class App extends React.Component {
   saveUserInfoToDatabase() {
     console.log('saving data to database...');
 
-    let newData = {...this.state};
+    let newData = this.state;
 
     // confirmPassword, require, form, isValidPassword
     delete newData[confirmPassword];
