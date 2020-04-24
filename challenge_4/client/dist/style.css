@@ -17,7 +17,6 @@ section.content_body {
 }
 
 .board {
-  text-align: center;
   margin: 0 auto;
   background-color: lightgreen;
   padding: 1rem;
@@ -29,4 +28,25 @@ section.content_body {
   height: 90px;
   border-radius: 50px;
   background-color: white;
+  vertical-align: middle;
+}
+
+.O {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  background-color: blue;
+  border-radius: 50%;
+}
+
+.X {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  background-color:red;
+  border-radius: 50%;
 }

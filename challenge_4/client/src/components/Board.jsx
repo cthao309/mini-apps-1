@@ -13,21 +13,25 @@ class Board  extends React.Component {
 
   render() {
     let board = this.props.board.map((rowItem, row) => {
-      return <tr>
+      return (<tr key={row}>
           {rowItem.map((colItem, col) => {
             return <Square
-                      key={row+col}
+                      key={`${row}${col}`}
                       row={row}
-                      col={col} />
+                      col={col}
+                      handleClickSquare={this.props.handleClickSquare}
+                      player={colItem}
+                    />
               })
           }
-        </tr>
-      })
+        </tr>)
+      });
     return (
-      <div className="board">
-        Board Game
-        {board}
-      </div>
+      <table className="board">
+        <tbody>
+          {board}
+        </tbody>
+      </table>
     )
   }
 }
