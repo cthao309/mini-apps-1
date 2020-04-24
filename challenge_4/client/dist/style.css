@@ -7,3 +7,26 @@ body {
 section.content_body {
   text-align: center;
 }
+
+.board_container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  text-align: center;
+  margin: 0 auto;
+  background-color: lightgreen;
+  padding: 1rem;
+}
+
+
+.square {
+  width: 90px;
+  height: 90px;
+  border-radius: 50px;
+  background-color: white;
+}

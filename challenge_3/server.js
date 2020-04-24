@@ -8,6 +8,8 @@ const PORT = 3000;
 
 // add express middleware
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // root end-point
 app.get('/', (req, res) => {

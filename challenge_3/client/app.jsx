@@ -1,4 +1,3 @@
-
 // child component "checkout button"
 const CheckoutBtn = (props) => {
   console.log('props => ', props)
@@ -325,10 +324,10 @@ class App extends React.Component {
     let newData = this.state;
 
     // confirmPassword, require, form, isValidPassword
-    delete newData[confirmPassword];
-    delete newData[require];
-    delete newData[form];
-    delete newData[isValidPassword];
+    delete newData['confirmPassword'];
+    delete newData['require'];
+    delete newData['form'];
+    delete newData['isValidPassword'];
 
     $.ajax({
       type: "POST",
